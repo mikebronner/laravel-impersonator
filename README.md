@@ -44,9 +44,5 @@ php artisan impersonator:publish --config
 php artisan impersonator:publish --views
 ```
 
-## ToDo Items
-- Cache and clear session before impersonating user.
-- Restore original session after exiting an impersonation session.
-
 ## Credits
 In large part prodded and inspired by LaraCasts' tutorial: https://laracasts.com/series/how-do-i/episodes/17. Thank you @JeffreyWay!
