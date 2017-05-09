@@ -2,6 +2,7 @@
 
 @section(config('genealabs-laravel-impersonator.content-section'))
     <div class="container">
+
         @if((auth()->user()->canImpersonate ?? false) && ! session('impersonator'))
             <div class="list-group">
 
@@ -24,5 +25,6 @@
                 </p>
             </div>
         @endif
+
     </div>
 @endsection

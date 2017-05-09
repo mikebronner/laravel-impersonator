@@ -14,6 +14,8 @@ class ImpersonateeController extends Controller
 
     public function index() : View
     {
+        $this->authorize('impersonation', auth()->user());
+
         return view('genealabs-laravel-impersonator::impersonatees')->with([
             'users' => (new $this->userClass)->orderBy('name')->get(),
         ]);
@@ -21,6 +23,8 @@ class ImpersonateeController extends Controller
 
     public function update($impersonatee) : RedirectResponse
     {
+        $this->authorize('impersonation', auth()->user());
+
         session(['impersonator' => auth()->user()]);
         auth()->login($impersonatee);
 
@@ -29,6 +33,8 @@ class ImpersonateeController extends Controller
 
     public function destroy() : RedirectResponse
     {
+        $this->authorize('impersonation', auth()->user());
+
         auth()->login(session('impersonator'));
         session(['impersonator' => null]);
 

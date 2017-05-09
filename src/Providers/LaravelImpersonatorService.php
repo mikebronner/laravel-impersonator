@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 class LaravelImpersonatorService extends AuthServiceProvider
 {
     protected $defer = false;
+    protected $policies = [];
 
     public function boot()
     {
@@ -31,11 +32,20 @@ class LaravelImpersonatorService extends AuthServiceProvider
         $this->loadViewsFrom($viewsFolder, 'genealabs-laravel-impersonator');
         $this->mergeConfigFrom($configPath, 'genealabs-laravel-impersonator');
 
-        app('router')->model('impersonatee', \App\User::class);
+        app('router')->model(
+            'impersonatee',
+            config('genealabs-laravel-impersonator.user-model')
+        );
 
-        app('Illuminate\Contracts\Auth\Access\Gate')->before(function ($user) {
-            return $user->canImpersonate;
-        });
+        $this->policies = [
+            config('genealabs-laravel-impersonator.user-model') => Impersonation::class,
+        ];
+
+        $this->registerPolicies();
+
+        // app('Illuminate\Contracts\Auth\Access\Gate')->before(function ($user) {
+        //     return $user->canImpersonate;
+        // });
     }
 
     public function register()
