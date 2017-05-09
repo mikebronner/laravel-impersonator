@@ -3,6 +3,7 @@
 ## Pre-requisites
 - Bootstrap 3 (4 coming soon)
 - Laravel 5.4+
+- PHP 7.0+
 
 ## Installation
 ```sh
