@@ -30,8 +30,14 @@ class ImpersonateeController extends Controller
     {
         $this->authorize('impersonation', auth()->user());
 
-        session(['impersonator' => auth()->user()]);
+        $oldSession = session()->all();
+        session()->flush();
+
         auth()->login($impersonatee);
+        session([
+            'impersonator' => auth()->user(),
+            'impersonator-session-data' => $oldSession,
+        ]);
 
         return redirect('/');
     }
@@ -40,8 +46,11 @@ class ImpersonateeController extends Controller
     {
         $this->authorize('impersonation', auth()->user());
 
-        auth()->login(session('impersonator'));
-        session(['impersonator' => null]);
+        $impersonator = session('impersonator');
+        $originalSession = session('impersonator-session-data');
+        session()->flush();
+        session($originalSession);
+        auth()->login($impersonator);
 
         return redirect('/');
     }

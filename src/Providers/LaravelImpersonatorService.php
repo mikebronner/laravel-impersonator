@@ -42,10 +42,6 @@ class LaravelImpersonatorService extends AuthServiceProvider
         ];
 
         $this->registerPolicies();
-
-        // app('Illuminate\Contracts\Auth\Access\Gate')->before(function ($user) {
-        //     return $user->canImpersonate;
-        // });
     }
 
     public function register()

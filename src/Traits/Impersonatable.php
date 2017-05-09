@@ -2,12 +2,14 @@
 
 trait Impersonatable
 {
-    protected $canImpersonate = false;
-    protected $canBeImpersonated = true;
+    protected $canImpersonate;
+    protected $canBeImpersonated;
 
     public function getCanImpersonateAttribute() : bool
     {
-        return $this->canImpersonate;
+        return true;
+        // dd($this->canImpersonate);
+        return $this->canImpersonate ?? false;
     }
 
     public function setCanImpersonateAttribute(bool $value)
