@@ -1,0 +1,22 @@
+{
+    "name": "genealabs/laravel-impersonator",
+    "description": "Impersonate users in your Laravel 5.4+ app.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "GeneaLabs, LLC",
+            "email": "hello@genealabs.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "classmap": [],
+        "psr-4": {
+            "GeneaLabs\\LaravelImpersonator\\": "src/",
+            "GeneaLabs\\LaravelImpersonator\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
