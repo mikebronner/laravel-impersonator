@@ -2,6 +2,6 @@
 
 use GeneaLabs\LaravelImpersonator\Http\Controllers\ImpersonateeController;
 
-Route::group(['middleware' => ['web', 'auth']], function () {
-    Route::resource('impersonatees', ImpersonateeController::class);
+app('router')->group(['middleware' => ['web', 'auth']], function () {
+    app('router')->resource('impersonatees', ImpersonateeController::class);
 });

@@ -15,9 +15,14 @@ class ImpersonateeController extends Controller
     public function index() : View
     {
         $this->authorize('impersonation', auth()->user());
+        $users = (new $this->userClass)->orderBy('name')
+            ->get()
+            ->filter(function ($user) {
+                return $user->canBeImpersonated;
+            });
 
         return view('genealabs-laravel-impersonator::impersonatees')->with([
-            'users' => (new $this->userClass)->orderBy('name')->get(),
+            'users' => $users,
         ]);
     }
 
