@@ -31,7 +31,7 @@ php artisan impersonator:publish --config
 1. Add trait `GeneaLabs\LaravelImpersonator\Traits\Impersonatable` to your user model.
 2. Override trait method `public function getCanImpersonateAttribute() : bool` that determines if a given user can impersonate other users.
 3. (optional) Override trait method `public function getCanBeImpersonatedAttribute() : bool` that determines if a given user can be impersonated.
-4. (optional) Use view partial `genealabs-laravel-impersonator::partials.end-impersonation-or-logout` in user drop-down menu to allow existing of impersonation session or logging out if user is not being impersonated.
+4. (optional) Use view partial `genealabs-laravel-impersonator::partials.end-impersonation-or-logout` in user drop-down menu to allow ending of impersonation session or logging out if user is not being impersonated.
 5. Use `route('impersonatees.index')` to view a list of all impersonatable users and choose one to impersonate in you menu in the following manner:
 ```php
 @if(auth()->check() && (auth()->user()->canImpersonate ?? false) && ! session('impersonator'))
