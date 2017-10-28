@@ -1,5 +1,7 @@
 # Laravel Impersonator
 
+[![Join the chat at https://gitter.im/GeneaLabs/laravel-impersonator](https://badges.gitter.im/GeneaLabs/laravel-impersonator.svg)](https://gitter.im/GeneaLabs/laravel-impersonator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Pre-requisites
 - Bootstrap 3 (4 coming soon)
 - Laravel 5.4+
