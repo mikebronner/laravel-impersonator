@@ -4,7 +4,7 @@ use GeneaLabs\LaravelImpersonator\Console\Commands\Publish;
 use GeneaLabs\LaravelImpersonator\Policies\Impersonation;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 
-class LaravelImpersonatorService extends AuthServiceProvider
+class Service extends AuthServiceProvider
 {
     protected $defer = false;
     protected $policies = [];
@@ -42,15 +42,6 @@ class LaravelImpersonatorService extends AuthServiceProvider
         ];
 
         $this->registerPolicies();
-    }
-
-    public function register()
-    {
         $this->commands(Publish::class);
-    }
-
-    public function provides() : array
-    {
-        return ['genealabs-laravel-impersonator'];
     }
 }

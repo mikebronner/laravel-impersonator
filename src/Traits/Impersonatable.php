@@ -7,12 +7,12 @@ trait Impersonatable
 
     public function getCanImpersonateAttribute() : bool
     {
-        return $this->canImpersonate ?? false;
+        return $this->can_impersonate ?? false;
     }
 
     public function setCanImpersonateAttribute(bool $value)
     {
-        $this->canImpersonate = $value;
+        $this->can_impersonate = $value;
     }
 
     public function getCanBeImpersonatedAttribute() : bool

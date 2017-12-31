@@ -1,7 +1,7 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Tests\Feature;
 
 use GeneaLabs\LaravelImpersonator\Tests\TestCase;
-use App\User;
+use GeneaLabs\LaravelImpersonator\Tests\Fixtures\User;
 
 class ImpersonateUsersTest extends TestCase
 {
@@ -9,8 +9,7 @@ class ImpersonateUsersTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->withExceptionHandling()
-            ->post(route('impersonatees.store', $user));
+        $response = $this->post(route('impersonatees.store', $user));
 
         $response->assertRedirect('login');
     }
@@ -20,8 +19,7 @@ class ImpersonateUsersTest extends TestCase
         $user = factory(User::class)->create();
         $impersonatedUser = factory(User::class)->create();
 
-        $response = $this->withExceptionHandling()
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->put(route('impersonatees.update', $impersonatedUser), []);
 
         $response->assertStatus(403);
@@ -32,8 +30,7 @@ class ImpersonateUsersTest extends TestCase
         $user = factory(User::class)->create(['canImpersonate' => true]);
         $impersonatedUser = factory(User::class)->create();
 
-        $response = $this->withExceptionHandling()
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->put(route('impersonatees.update', $impersonatedUser), []);
 
         $this->assertEquals(auth()->user()->id, $impersonatedUser->id);
