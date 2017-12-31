@@ -1,6 +1,8 @@
 # Laravel Impersonator
 
 [![Join the chat at https://gitter.im/GeneaLabs/laravel-impersonator](https://badges.gitter.im/GeneaLabs/laravel-impersonator.svg)](https://gitter.im/GeneaLabs/laravel-impersonator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Travis](https://img.shields.io/travis/GeneaLabs/laravel-impersonator.svg)](https://travis-ci.org/GeneaLabs/laravel-impersonator)
+[![Coveralls](https://img.shields.io/coveralls/GeneaLabs/laravel-impersonator.svg)](https://coveralls.io/github/GeneaLabs/laravel-impersonator)
 
 ## Pre-requisites
 - Bootstrap 3 (4 coming soon)
