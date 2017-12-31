@@ -4,20 +4,20 @@
 
 ## Pre-requisites
 - Bootstrap 3 (4 coming soon)
-- Laravel 5.4+
+- Laravel 5.5
 - PHP 7.0+
 
 ## Installation
+If you are using Larvel 5.4, please switch to the
+[laravel-5.4 branch](https://github.com/GeneaLabs/laravel-impersonator/tree/laravel-5.4)
+and follow the instructions there.
+
 ```sh
 composer require genealabs/laravel-impersonator
 ```
 
-Add service provider to your application:
-```php
-// 'providers' => [
-    GeneaLabs\LaravelImpersonator\Providers\LaravelImpersonatorService::class,
-// ],
-```
+This package will be auto-loaded by Laravel 5.5, it is not necessary to register
+any service providers or aliases for this package.
 
 ## Configuration
 - `genealabs-laravel-impersonator.layout`: master blade layout view for your application (default `layouts.app`).

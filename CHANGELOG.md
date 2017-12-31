@@ -1,5 +1,10 @@
 # ChangeLog
 ## Releases
+### 0.2.0 [31 Dec 2017]
+#### Changed
+- composer dependency versions to work with Laravel 5.5.
+- unit testing process to work without a parent application.
+
 ### 0.1.2 [9 May 2017]
 #### Added
 - Caching and restoring or original user's session while they impersonate another user.

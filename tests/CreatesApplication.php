@@ -1,20 +1,26 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Tests;
 
+use GeneaLabs\LaravelImpersonator\Providers\Service as LaravelImpersonatorService;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Database\Eloquent\Factory;
 
 trait CreatesApplication
 {
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
     public function createApplication()
     {
-        $app = require(__DIR__ . '/../../../../bootstrap/app.php');
-
+        $this->preLoadRoutes();
+        $app = require __DIR__ . '/../vendor/laravel/laravel/bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
+        $app->make(Factory::class)->load(__DIR__ . '/Fixtures/database/factories');
+        $app->register(LaravelImpersonatorService::class);
 
         return $app;
+    }
+
+    protected function preLoadRoutes()
+    {
+        $routes = file_get_contents(__DIR__ . '/../vendor/laravel/laravel/routes/web.php');
+        $routes .= str_contains($routes, 'Auth::routes();') ? '' : "\nAuth::routes();\n";
+        file_put_contents(__DIR__ . '/../vendor/laravel/laravel/routes/web.php', $routes);
     }
 }
