@@ -2,9 +2,6 @@
 
 trait Impersonatable
 {
-    protected $canImpersonate = false;
-    protected $canBeImpersonated = true;
-
     public function getCanImpersonateAttribute() : bool
     {
         return $this->can_impersonate ?? false;
@@ -17,11 +14,11 @@ trait Impersonatable
 
     public function getCanBeImpersonatedAttribute() : bool
     {
-        return $this->canBeImpersonated;
+        return $this->can_be_impersonated ?? true;
     }
 
     public function setCanBeImpersonatedAttribute(bool $value)
     {
-        $this->canBeImpersonated = $value;
+        $this->can_be_impersonated = $value;
     }
 }
