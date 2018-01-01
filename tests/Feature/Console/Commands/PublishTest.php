@@ -21,7 +21,9 @@ class PublishTest extends TestCase
 
     public function testConfigFileIsPublished()
     {
-        unlink(config_path('genealabs-laravel-impersonator.php'));
+        if (file_exists(config_path('genealabs-laravel-impersonator.php'))) {
+            unlink(config_path('genealabs-laravel-impersonator.php'));
+        }
 
         $this->artisan('impersonator:publish', ['--config' => true]);
 
