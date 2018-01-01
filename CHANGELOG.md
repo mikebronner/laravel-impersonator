@@ -1,21 +1,31 @@
 # ChangeLog
-## Releases
-### 0.2.0 [31 Dec 2017]
-#### Changed
+## 0.2.2 [1 Jan 2018]
+### Fixed
+- view to not use `genealabs/laravel-casts` package.
+
+## 0.2.1 [1 Dec 2018]
+### Fixed
+- publishing of views and config file.
+
+### Added
+- more feature tests.
+
+## 0.2.0 [31 Dec 2017]
+### Changed
 - composer dependency versions to work with Laravel 5.5.
 - unit testing process to work without a parent application.
 
-### 0.1.2 [9 May 2017]
-#### Added
+## 0.1.2 [9 May 2017]
+### Added
 - Caching and restoring or original user's session while they impersonate another user.
 
-#### Removed
+### Removed
 - incorrect composer dependency `illuminate/foundation`.
 
-### 0.1.1 [9 May 2017]
-#### Added
+## 0.1.1 [9 May 2017]
+### Added
 - composer package dependencies.
 - change-log.
 
-### 0.1.0 [9 May 2017]
+## 0.1.0 [9 May 2017]
 - Initial functionality.

@@ -7,12 +7,18 @@
             <div class="list-group">
 
                 @foreach($users as $user)
-                    @form(['route' => ['impersonatees.update', $user], 'method' => 'PUT', 'class' => 'list-group-item'])
+                    <form action="{{ route('impersonatees.update', $user) }}"
+                        method="POST"
+                        class="list-group-item"
+                    >
+                        {{ csrf_field () }}
+                        {{ method_field ('PUT') }}
+
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-lg fa-btn fa-user-secret"></i>
                         </button>
                         {{ $user->name }}
-                    @endform
+                    </form>
                 @endforeach
 
             </div>
