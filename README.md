@@ -35,13 +35,48 @@ php artisan impersonator:publish --config
 1. Add trait `GeneaLabs\LaravelImpersonator\Traits\Impersonatable` to your user model.
 2. Override trait method `public function getCanImpersonateAttribute() : bool` that determines if a given user can impersonate other users.
 3. (optional) Override trait method `public function getCanBeImpersonatedAttribute() : bool` that determines if a given user can be impersonated.
-4. (optional) Use view partial `genealabs-laravel-impersonator::partials.end-impersonation-or-logout` in user drop-down menu to allow ending of impersonation session or logging out if user is not being impersonated.
-5. Use `route('impersonatees.index')` to view a list of all impersonatable users and choose one to impersonate in you menu in the following manner:
-```php
-@if(auth()->check() && (auth()->user()->canImpersonate ?? false) && ! session('impersonator'))
-    <li><a href="{{ route('impersonatees.index') }}">Impersonator</a></li>
-@endif
-```
+4. Use `route('impersonatees.index')` to view a list of all impersonatable users.
+You could add something like the following to your menu:
+  ```php
+  @if ((auth()->user()->canImpersonate ?? false) && ! session('impersonator'))
+      <a class="dropdown-item" href="{{ route('impersonatees.index') }}">Impersonator</a>
+  @endif
+  ```
+
+5. (optional) Add something like the following to your menu view to allow
+imporsonator to stop impersonating:
+  ```php
+  @if (session('impersonator'))
+      <a href="{{ url('/logout') }}"
+          class="dropdown-item"
+          onclick="event.preventDefault(); document.getElementById('end-personation-session-form').submit();"
+      >
+          End Impersonation Session
+      </a>
+      <form action="{{ route('impersonatees.destroy', auth()->user()) }}"
+          method="POST"
+          style="display: none;"
+          id="end-personation-session-form"
+      >
+          {{ csrf_field () }}
+          {{ method_field ('DELETE') }}
+      </form>
+  @else
+      <a href="{!! route('logout') !!}"
+          class="dropdown-item"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          Logout
+      </a>
+      <form method="POST"
+          action="{{ route('logout') }}"
+          accept-charset="UTF-8"
+          id="logout-form"
+          style="display:none;"
+      >
+          {{ csrf_field () }}
+      </form>
+  @endif
+  ```
 
 ## Customization
 ```sh
