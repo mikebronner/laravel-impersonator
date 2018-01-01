@@ -7,16 +7,16 @@ use Illuminate\Contracts\Console\Kernel;
 
 class Publish extends Command
 {
-    protected $signature = 'impersonator:publish {--assets} {--config}';
+    protected $signature = 'impersonator:publish {--config} {--views}';
     protected $description = 'Publish various assets of the Laravel Impersonator package.';
 
     public function handle()
     {
-        if ($this->option('assets')) {
-            $this->delTree(public_path('genealabs-laravel-impersonator'));
+        if ($this->option('views')) {
+            $this->delTree(resource_path('views/vendor/genealabs/laravel-impersonator'));
             $this->call('vendor:publish', [
                 '--provider' => Service::class,
-                '--tag' => ['assets'],
+                '--tag' => ['views'],
                 '--force' => true,
             ]);
         }

@@ -12,7 +12,6 @@ class Service extends AuthServiceProvider
     public function boot()
     {
         $configPath = __DIR__ . '/../../config/genealabs-laravel-impersonator.php';
-        $publicFolder = __DIR__ . '/../../public/';
         $routesPath = __DIR__ . '/../../routes/web.php';
         $viewsFolder = __DIR__ . '/../../resources/views';
 
@@ -20,8 +19,8 @@ class Service extends AuthServiceProvider
             $configPath => config_path('genealabs-laravel-impersonator.php')
         ], 'config');
         $this->publishes([
-            $publicFolder => public_path('vendor/genealabs/laravel-impersonator'),
-        ], 'assets');
+            $viewsFolder => resource_path('views/vendor/genealabs/laravel-impersonator'),
+        ], 'views');
 
         $this->loadRoutesFrom($routesPath);
         $this->loadViewsFrom($viewsFolder, 'genealabs-laravel-impersonator');
