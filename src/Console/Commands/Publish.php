@@ -1,7 +1,7 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Console\Commands;
 
 use File;
-use GeneaLabs\LaravelImpersonator\Providers\LaravelImpersonatorService;
+use GeneaLabs\LaravelImpersonator\Providers\Service;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
 
@@ -15,7 +15,7 @@ class Publish extends Command
         if ($this->option('assets')) {
             $this->delTree(public_path('genealabs-laravel-impersonator'));
             $this->call('vendor:publish', [
-                '--provider' => LaravelImpersonatorService::class,
+                '--provider' => Service::class,
                 '--tag' => ['assets'],
                 '--force' => true,
             ]);
@@ -23,7 +23,7 @@ class Publish extends Command
 
         if ($this->option('config')) {
             $this->call('vendor:publish', [
-                '--provider' => LaravelImpersonatorService::class,
+                '--provider' => Service::class,
                 '--tag' => ['config'],
                 '--force' => true,
             ]);
