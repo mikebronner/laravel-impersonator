@@ -1,9 +1,9 @@
-<?php namespace GeneaLabs\LaravelImpersonator\Tests\Feature;
+<?php namespace GeneaLabs\LaravelImpersonator\Tests\Unit;
 
-use GeneaLabs\LaravelImpersonator\Tests\TestCase;
 use GeneaLabs\LaravelImpersonator\Tests\Fixtures\User;
+use GeneaLabs\LaravelImpersonator\Tests\UnitTestCase;
 
-class ImpersonateUsersTest extends TestCase
+class ImpersonateUsersTest extends UnitTestCase
 {
     public function testThatNonAdminNonLoggedInUserCannotImpersonateUsers()
     {
@@ -30,7 +30,7 @@ class ImpersonateUsersTest extends TestCase
         $user = factory(User::class)->create(['canImpersonate' => true]);
         $impersonatedUser = factory(User::class)->create();
 
-        $response = $this->actingAs($user)
+        $this->actingAs($user)
             ->put(route('impersonatees.update', $impersonatedUser), []);
 
         $this->assertEquals(auth()->user()->id, $impersonatedUser->id);

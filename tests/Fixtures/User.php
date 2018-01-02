@@ -8,7 +8,7 @@ class User extends OG
     use Impersonatable;
 
     protected $canImpersonateFlag = false;
-    protected $canBeImpersonatedFlag = false;
+    protected $canBeImpersonatedFlag = true;
 
     public function getCanImpersonateAttribute() : bool
     {

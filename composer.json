@@ -25,9 +25,10 @@
         "laravel/laravel": "5.5.*",
         "mockery/mockery": "0.9.*",
         "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "5.7.*",
+        "phpunit/phpunit": "6.*",
         "php-coveralls/php-coveralls" : "*",
-        "sebastian/phpcpd": "*"
+        "sebastian/phpcpd": "*",
+        "laravel/browser-kit-testing": "^2.0"
     },
     "autoload": {
         "classmap": [],

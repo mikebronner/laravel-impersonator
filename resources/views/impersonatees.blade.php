@@ -14,8 +14,8 @@
                         {{ csrf_field () }}
                         {{ method_field ('PUT') }}
 
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-lg fa-btn fa-user-secret"></i>
+                        <button type="submit" class="btn btn-primary " name="{{ $user->name }}">
+                            <span class="fa fa-lg fa-btn fa-user-secret"></span>
                         </button>
                         {{ $user->name }}
                     </form>
