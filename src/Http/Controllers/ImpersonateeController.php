@@ -15,6 +15,7 @@ class ImpersonateeController extends Controller
     public function index() : View
     {
         $this->authorize('impersonation', auth()->user());
+
         $users = (new $this->userClass)->orderBy('name')
             ->get()
             ->filter(function ($user) {
