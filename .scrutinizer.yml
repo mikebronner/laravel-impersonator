@@ -1,4 +1,4 @@
-language: php
+# language: php
 
 filter:
     excluded_paths:
