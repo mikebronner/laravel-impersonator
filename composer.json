@@ -1,6 +1,6 @@
 {
     "name": "genealabs/laravel-impersonator",
-    "description": "Impersonate users in your Laravel 5.5+ app.",
+    "description": "Impersonate users in your Laravel 5.+ app.",
     "license": "MIT",
     "authors": [
         {
@@ -10,19 +10,19 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "illuminate/config": ">=5.5.*",
-        "illuminate/console": ">=5.5.*",
-        "illuminate/contracts": ">=5.5.*",
-        "illuminate/http": ">=5.5.*",
-        "illuminate/routing": ">=5.5.*",
-        "illuminate/session": ">=5.5.*",
-        "illuminate/support": ">=5.5.*",
-        "illuminate/view": ">=5.5.*"
+        "illuminate/config": ">=5.5",
+        "illuminate/console": ">=5.5",
+        "illuminate/contracts": ">=5.5",
+        "illuminate/http": ">=5.5",
+        "illuminate/routing": ">=5.5",
+        "illuminate/session": ">=5.5",
+        "illuminate/support": ">=5.5",
+        "illuminate/view": ">=5.5"
     },
     "require-dev": {
         "codedungeon/phpunit-result-printer": "^0.4.4",
         "fzaninotto/faker": "~1.4",
-        "laravel/laravel": ">=5.5.*",
+        "laravel/laravel": ">=5.5",
         "mockery/mockery": "0.9.*",
         "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": ">=6.*",
