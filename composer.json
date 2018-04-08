@@ -1,6 +1,6 @@
 {
     "name": "genealabs/laravel-impersonator",
-    "description": "Impersonate users in your Laravel 5.6+ app.",
+    "description": "Impersonate users in your Laravel 5.5+ app.",
     "license": "MIT",
     "authors": [
         {
@@ -9,23 +9,23 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "illuminate/config": "5.6.*",
-        "illuminate/console": "5.6.*",
-        "illuminate/contracts": "5.6.*",
-        "illuminate/http": "5.6.*",
-        "illuminate/routing": "5.6.*",
-        "illuminate/session": "5.6.*",
-        "illuminate/support": "5.6.*",
-        "illuminate/view": "5.6.*"
+        "php": ">=7.0.0",
+        "illuminate/config": ">=5.5.*",
+        "illuminate/console": ">=5.5.*",
+        "illuminate/contracts": ">=5.5.*",
+        "illuminate/http": ">=5.5.*",
+        "illuminate/routing": ">=5.5.*",
+        "illuminate/session": ">=5.5.*",
+        "illuminate/support": ">=5.5.*",
+        "illuminate/view": ">=5.5.*"
     },
     "require-dev": {
         "codedungeon/phpunit-result-printer": "^0.4.4",
         "fzaninotto/faker": "~1.4",
-        "laravel/laravel": "5.5.*",
+        "laravel/laravel": ">=5.5.*",
         "mockery/mockery": "0.9.*",
         "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "6.*",
+        "phpunit/phpunit": ">=6.*",
         "php-coveralls/php-coveralls" : "*",
         "sebastian/phpcpd": "*",
         "laravel/browser-kit-testing": "^2.0"
