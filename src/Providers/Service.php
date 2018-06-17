@@ -20,7 +20,7 @@ class Service extends AuthServiceProvider
         ], 'config');
 
         $this->publishes([
-            $viewsFolder => resource_path('views/vendor/genealabs/laravel-impersonator'),
+            $viewsFolder => resource_path('views/vendor/genealabs-laravel-impersonator'),
         ], 'views');
 
         $this->loadRoutesFrom($routesPath);
