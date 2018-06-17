@@ -12,6 +12,10 @@ class Publish extends Command
 
     public function handle()
     {
+        if(count($this->options()) == 0){
+            $this->info('Please use at least one of the options: impersonator:publish {--config} {--views}');
+        }
+
         if ($this->option('views')) {
             $this->delTree(resource_path('views/vendor/genealabs/laravel-impersonator'));
             $this->call('vendor:publish', [
@@ -28,6 +32,8 @@ class Publish extends Command
                 '--force' => true,
             ]);
         }
+
+
     }
 
     private function delTree($folder)

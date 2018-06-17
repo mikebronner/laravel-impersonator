@@ -45,14 +45,22 @@ class ImpersonateeController extends Controller
 
     public function destroy() : RedirectResponse
     {
-        $this->authorize('impersonation', auth()->user());
+        /** This need to be comment **/
+        //$this->authorize('impersonation', auth()->user());
 
         $impersonator = session('impersonator');
-        $originalSession = session('impersonator-session-data');
-        session()->flush();
-        session($originalSession);
-        auth()->login($impersonator);
-
-        return redirect('/');
+        if(!empty($impersonator)){
+            $originalSession = session('impersonator-session-data');
+            session()->flush();
+            session($originalSession);
+            auth()->login($impersonator);
+            $msg = 'Impersonation Session end successfully.';
+            // Message is optional and have to be implemented in layout first
+            return back()->with('success',$msg); //using back instead of /
+        }
+        else{
+            $msg =  'No impersonation session located.';
+            return back()->with('error',$msg);  //using back instead of /
+        }
     }
 }
