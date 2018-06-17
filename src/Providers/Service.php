@@ -18,12 +18,13 @@ class Service extends AuthServiceProvider
         $this->publishes([
             $configPath => config_path('genealabs-laravel-impersonator.php')
         ], 'config');
+
         $this->publishes([
             $viewsFolder => resource_path('views/vendor/genealabs/laravel-impersonator'),
         ], 'views');
 
         $this->loadRoutesFrom($routesPath);
-        $this->loadViewsFrom($viewsFolder, 'genealabs-laravel-impersonator');
+        $this->loadViewsFrom($viewsFolder, 'genealabs-laravel-impersonator', 'genealabs-laravel-impersonator');
         $this->mergeConfigFrom($configPath, 'genealabs-laravel-impersonator');
 
         app('router')->model(
