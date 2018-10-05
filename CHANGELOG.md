@@ -1,4 +1,8 @@
 # ChangeLog
+## 0.2.3 [5 Oct 2018]
+### Added
+- Laravel 5.7 compatibility.
+
 ## 0.2.2 [1 Jan 2018]
 ### Fixed
 - view to not use `genealabs/laravel-casts` package.
