@@ -1,5 +1,6 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -43,7 +44,7 @@ class ImpersonateeController extends Controller
         return redirect('/');
     }
 
-    public function destroy() : RedirectResponse
+    public function destroy() : Response
     {
         $impersonator = session('impersonator');
         $this->authorize('impersonation', $impersonator);
@@ -51,6 +52,10 @@ class ImpersonateeController extends Controller
         session()->flush();
         session($originalSession);
         auth()->login($impersonator);
+
+        if (request()->ajax()) {
+            return response(null, 204);
+        }
 
         return redirect('/');
     }
