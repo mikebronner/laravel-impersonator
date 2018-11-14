@@ -45,9 +45,8 @@ class ImpersonateeController extends Controller
 
     public function destroy() : RedirectResponse
     {
-        $this->authorize('impersonation', auth()->user());
-
         $impersonator = session('impersonator');
+        $this->authorize('impersonation', $impersonator);
         $originalSession = session('impersonator-session-data');
         session()->flush();
         session($originalSession);
