@@ -2,7 +2,7 @@
 
 class Impersonation
 {
-    public function impersonation($impersonator) : bool
+    public function impersonation($user, $impersonator) : bool
     {
         return $impersonator->canImpersonate ?? false;
     }
