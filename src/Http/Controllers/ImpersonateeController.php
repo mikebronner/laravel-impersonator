@@ -3,6 +3,7 @@
 use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use GeneaLabs\LaravelImpersonator\Impersonator;
 
 class ImpersonateeController extends Controller
 {
@@ -15,7 +16,7 @@ class ImpersonateeController extends Controller
 
     public function index() : View
     {
-        $this->authorize('impersonation', auth()->user());
+        $this->authorize('impersonation', new Impersonator);
 
         $users = (new $this->userClass)->orderBy('name')
             ->get()
@@ -30,7 +31,7 @@ class ImpersonateeController extends Controller
 
     public function update($impersonatee) : RedirectResponse
     {
-        $this->authorize('impersonation', auth()->user());
+        $this->authorize('impersonation', new Impersonator);
 
         $impersonator = auth()->user();
         $oldSession = session()->all();
@@ -47,7 +48,7 @@ class ImpersonateeController extends Controller
     public function destroy() : Response
     {
         $impersonator = session('impersonator');
-        $this->authorize('impersonation', $impersonator);
+        $this->authorizeForUser($impersonator, 'impersonation', new Impersonator);
         $originalSession = session('impersonator-session-data');
         session()->flush();
         session($originalSession);
