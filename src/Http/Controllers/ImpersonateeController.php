@@ -1,6 +1,6 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use GeneaLabs\LaravelImpersonator\Impersonator;
