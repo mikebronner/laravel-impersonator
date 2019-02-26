@@ -3,11 +3,14 @@
 use GeneaLabs\LaravelImpersonator\Console\Commands\Publish;
 use GeneaLabs\LaravelImpersonator\Policies\Impersonation;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
+use GeneaLabs\LaravelImpersonator\Impersonator;
 
 class Service extends AuthServiceProvider
 {
     protected $defer = false;
-    protected $policies = [];
+    protected $policies = [
+        Impersonator::class => Impersonation::class,
+    ];
 
     public function boot()
     {
@@ -30,10 +33,6 @@ class Service extends AuthServiceProvider
             'impersonatee',
             config('genealabs-laravel-impersonator.user-model')
         );
-
-        $this->policies = [
-            config('genealabs-laravel-impersonator.user-model') => Impersonation::class,
-        ];
 
         $this->registerPolicies();
         $this->commands(Publish::class);
