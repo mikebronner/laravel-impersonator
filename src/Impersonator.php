@@ -1,4 +1,4 @@
-<?php namespace namespace GeneaLabs\LaravelImpersonator;
+<?php namespace GeneaLabs\LaravelImpersonator;
 
 class Impersonator
 {
