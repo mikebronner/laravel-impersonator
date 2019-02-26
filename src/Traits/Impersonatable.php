@@ -4,21 +4,23 @@ trait Impersonatable
 {
     public function getCanImpersonateAttribute() : bool
     {
-        return $this->can_impersonate ?? false;
+        return $this->attributes["can_impersonate"]
+            ?? false;
     }
 
     public function setCanImpersonateAttribute(bool $value)
     {
-        $this->can_impersonate = $value;
+        $this->attributes["can_impersonate"] = $value;
     }
 
     public function getCanBeImpersonatedAttribute() : bool
     {
-        return $this->can_be_impersonated ?? true;
+        return $this->attributes["can_be_impersonated"]
+            ?? true;
     }
 
     public function setCanBeImpersonatedAttribute(bool $value)
     {
-        $this->can_be_impersonated = $value;
+        $this->attributes["can_be_impersonated"] = $value;
     }
 }
