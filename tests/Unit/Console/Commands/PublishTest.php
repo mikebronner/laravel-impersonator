@@ -36,21 +36,21 @@ class PublishTest extends UnitTestCase
 
         $this->artisan('impersonator:publish', ['--views' => true]);
 
-        $this->assertDirectoryExists(resource_path('views/vendor/genealabs/laravel-impersonator'));
+        $this->assertDirectoryExists(resource_path('views/vendor/genealabs-laravel-impersonator'));
     }
 
     public function testViewsAreDeletedBeforePublishing()
     {
         $this->artisan('impersonator:publish', ['--views' => true]);
-        app('files')->makeDirectory(resource_path('views/vendor/genealabs/laravel-impersonator/test'), 0755, true);
-        app('files')->put(resource_path('views/vendor/genealabs/laravel-impersonator/test/testfile.php'), '');
+        app('files')->makeDirectory(resource_path('views/vendor/genealabs-laravel-impersonator/test'), 0755, true, true);
+        app('files')->put(resource_path('views/vendor/genealabs-laravel-impersonator/test/testfile.php'), '');
 
-        $testFileExistedBefore = file_exists(resource_path('views/vendor/genealabs/laravel-impersonator/test/testfile.php'));
+        $testFileExistedBefore = file_exists(resource_path('views/vendor/genealabs-laravel-impersonator/test/testfile.php'));
         $this->artisan('impersonator:publish', ['--views' => true]);
-        $testFileExistsAfter = file_exists(resource_path('views/vendor/genealabs/laravel-impersonator/test/testfile.php'));
+        $testFileExistsAfter = file_exists(resource_path('views/vendor/genealabs-laravel-impersonator/test/testfile.php'));
 
         $this->assertTrue($testFileExistedBefore);
         $this->assertFalse($testFileExistsAfter);
-        $this->assertDirectoryExists(resource_path('views/vendor/genealabs/laravel-impersonator'));
+        $this->assertDirectoryExists(resource_path('views/vendor/genealabs-laravel-impersonator'));
     }
 }
