@@ -41,7 +41,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "GeneaLabs\\LaravelImpersonator\\Providers\\Service"
+                "GeneaLabs\\LaravelImpersonator\\Providers\\Service",
+                "GeneaLabs\\LaravelImpersonator\\Providers\\Tool"
             ]
         }
     },
