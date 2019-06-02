@@ -1,4 +1,4 @@
-<?php namespace GeneaLabs\LaravelImpersonator;
+<?php namespace GeneaLabs\LaravelImpersonator\Providers;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
@@ -15,7 +15,7 @@ class Tool extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-impersonator');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laravel-impersonator');
 
         $this->app->booted(function () {
             $this->routes();
@@ -38,8 +38,10 @@ class Tool extends ServiceProvider
         }
 
         Route::middleware(['nova', Authorize::class])
-                ->prefix('nova-vendor/laravel-impersonator')
-                ->group(__DIR__.'/../routes/api.php');
+        // Route::middleware([])
+            ->prefix('genealabs/laravel-impersonator/nova')
+            ->namespace("GeneaLabs\LaravelImpersonator\Http\Controllers\Nova")
+            ->group(__DIR__ . '/../../routes/nova.php');
     }
 
     /**

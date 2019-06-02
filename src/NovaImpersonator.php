@@ -1,11 +1,9 @@
-<?php
-
-namespace Genealabs\LaravelImpersonator;
+<?php namespace Genealabs\LaravelImpersonator;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
-class LaravelImpersonator extends Tool
+class NovaImpersonator extends Tool
 {
     /**
      * Perform any tasks that need to happen when the tool is booted.

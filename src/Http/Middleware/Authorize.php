@@ -1,7 +1,7 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Http\Middleware;
 
+use GeneaLabs\LaravelImpersonator\NovaImpersonator;
 use Laravel\Nova\Nova;
-use Genealabs\LaravelImpersonator\LaravelImpersonator;
 
 class Authorize
 {
@@ -14,9 +14,12 @@ class Authorize
      */
     public function handle($request, $next)
     {
-        $tool = collect(Nova::registeredTools())->first([$this, 'matchesTool']);
+        $tool = collect(Nova::registeredTools())
+            ->first([$this, 'matchesTool']);
 
-        return optional($tool)->authorize($request) ? $next($request) : abort(403);
+        return optional($tool)->authorize($request)
+            ? $next($request)
+            : abort(403);
     }
 
     /**
@@ -27,6 +30,6 @@ class Authorize
      */
     public function matchesTool($tool)
     {
-        return $tool instanceof LaravelImpersonator;
+        return $tool instanceof NovaImpersonator;
     }
 }
