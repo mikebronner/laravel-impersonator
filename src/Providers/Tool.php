@@ -38,7 +38,6 @@ class Tool extends ServiceProvider
         }
 
         Route::middleware(['nova', Authorize::class])
-        // Route::middleware([])
             ->prefix('genealabs/laravel-impersonator/nova')
             ->namespace("GeneaLabs\LaravelImpersonator\Http\Controllers\Nova")
             ->group(__DIR__ . '/../../routes/nova.php');
