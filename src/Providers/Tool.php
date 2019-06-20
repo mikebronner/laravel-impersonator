@@ -1,29 +1,24 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Providers;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use GeneaLabs\LaravelImpersonator\Http\Middleware\Authorize;
 
 class Tool extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laravel-impersonator');
+        if (class_exists("Laravel\Nova\Nova")) {
+            $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laravel-impersonator');
 
-        $this->app->booted(function () {
-            $this->routes();
-        });
+            $this->app->booted(function () {
+                $this->routes();
+            });
 
-        Nova::serving(function (ServingNova $event) {
-            //
-        });
+            \Laravel\Nova\Nova::serving(function (\Laravel\Nova\Events\ServingNova $event) {
+                //
+            });
+        }
     }
 
     /**

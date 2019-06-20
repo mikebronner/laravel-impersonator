@@ -18,6 +18,7 @@ class ImpersonateeController extends Controller
 
     public function index() : Collection
     {
+        // TODO: figure out why these are failing authorization
         // $this->authorize('impersonation', new Impersonator);
 
         return (new $this->userClass)->orderBy('name')
@@ -29,8 +30,8 @@ class ImpersonateeController extends Controller
 
     public function update($impersonatee) : Response
     {
+        // TODO: figure out why these are failing authorization
         // $this->authorize('impersonation', new Impersonator);
-\Log::debug([auth()->user()]);
         $impersonator = auth()->user();
         $oldSession = session()->all();
         session()->flush();
