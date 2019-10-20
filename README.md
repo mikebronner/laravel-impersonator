@@ -1,4 +1,6 @@
-# Laravel Impersonator
+# Impersonator for Laravel
+
+![Impersonator for Laravel masthead image.](https://repository-images.githubusercontent.com/90768538/6b44c600-f29c-11e9-88af-65e839679460)
 
 [![Travis](https://img.shields.io/travis/GeneaLabs/laravel-impersonator.svg)](https://travis-ci.org/GeneaLabs/laravel-impersonator)
 [![Coveralls](https://img.shields.io/coveralls/GeneaLabs/laravel-impersonator.svg)](https://coveralls.io/github/GeneaLabs/laravel-impersonator)
