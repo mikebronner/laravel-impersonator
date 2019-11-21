@@ -18,7 +18,7 @@ class ImpersonateeController extends Controller
     {
         $this->authorize('impersonation', new Impersonator);
 
-        $users = (new $this->userClass)->orderBy(config('genealabs-laravel-impersonator.orderby-field-name'))
+        $users = (new $this->userClass)->orderBy(config('genealabs-laravel-impersonator.orderby-column'))
             ->get()
             ->filter(function ($user) {
                 return $user->canBeImpersonated;
