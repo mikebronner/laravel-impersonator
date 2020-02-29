@@ -1,4 +1,8 @@
 # ChangeLog
+## [7.0.0] 2020-02-29
+### Added
+- Laravel 7.0 compatibility.
+
 ## 0.2.3 [5 Oct 2018]
 ### Added
 - Laravel 5.7 compatibility.
