@@ -3,9 +3,13 @@
 ### Added
 - configuration option for name field.
 
-## [7.0.1] 2020-03-06
+## [7.0.2] 2020-03-06
 ### Removed
 - pre-Laravel 7 dependencies.
+
+## [7.0.1] 2020-03-01
+### Added
+- configuration option for name field.
 
 ## [7.0.0] 2020-02-29
 ### Added
