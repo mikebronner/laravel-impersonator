@@ -12,6 +12,22 @@ class ImpersonateeController extends Controller
     public function __construct()
     {
         $this->userClass = config('genealabs-laravel-impersonator.user-model');
+
+        // Allow us to customise the middleware being used for each route.
+        foreach (config('genealabs-laravel-impersonator.middleware', ['web', 'auth']) as $middleware => $config) {
+            if (is_int($middleware)) {
+                $middleware = $config;
+            }
+
+            $middleware = $this->middleware($middleware);
+
+            if ($config['only'] ?? false) {
+                $middleware->only($config['only']);
+            }
+            if ($config['except'] ?? false) {
+                $middleware->except($config['except']);
+            }
+        }
     }
 
     public function index() : View

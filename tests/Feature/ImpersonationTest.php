@@ -2,6 +2,7 @@
 
 use GeneaLabs\LaravelImpersonator\Tests\Fixtures\User;
 use GeneaLabs\LaravelImpersonator\Tests\FeatureTestCase;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ImpersonationTest extends FeatureTestCase
 {
@@ -52,5 +53,25 @@ class ImpersonationTest extends FeatureTestCase
             ->press($users->first()->name);
 
         $response->assertSessionHas('impersonator', $user);
+    }
+
+    public function testMiddlewareCanBeAdjusted()
+    {
+        $this->withoutExceptionHandling();
+        config(['genealabs-laravel-impersonator.user-model' => User::class]);
+        config(['genealabs-laravel-impersonator.middleware' => ['web', 'auth', 'password.confirm' => ['except' => ['destroy']]]]);
+
+        $user = factory(User::class)->create([
+            'canImpersonate' => true,
+            'canBeImpersonated' => false,
+        ]);
+        $users = factory(User::class, 10)->create();
+
+        $this->expectException(RouteNotFoundException::class);
+        $this->expectExceptionMessage('Route [password.confirm] not defined.');
+
+        $response = $this
+            ->actingAs($user)
+            ->get(route('impersonatees.index'));
     }
 }
