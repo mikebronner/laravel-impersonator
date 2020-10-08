@@ -29,6 +29,7 @@ any service providers or aliases for this package.
 - `genealabs-laravel-impersonator.layout`: master blade layout view for your application (default `layouts.app`).
 - `genealabs-laravel-impersonator.content-section`: name of content section in master layout blade view (default `content`).
 - `genealabs-laravel-impersonator.user-model`: user model of your application (default `config('auth.providers.users.model')`).
+- `genealabs-laravel-impersonator.middleware`: the middleware to use for the impersonatee routes (default: `['web', 'auth']`).
 
 If you need to customize these settings:
 ```sh
