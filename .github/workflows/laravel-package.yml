@@ -56,12 +56,11 @@ jobs:
       run: |
         mkdir -p ./build/logs
         vendor/bin/phpunit --configuration phpunit.xml --testsuite Integration,Feature --coverage-text --coverage-clover ./build/logs/clover.xml
+        php vendor/bin/php-coveralls -v
 
     - name: Run Tests with Nova
       if: github.event_name != 'pull_request'
       run: |
         mkdir -p ./build/logs
         vendor/bin/phpunit --configuration phpunit.xml --testsuite Nova,Integration,Feature --coverage-text --coverage-clover ./build/logs/clover.xml
-
-    - name: Submit Coveralls Report
-      run: php vendor/bin/php-coveralls -v
+        php vendor/bin/php-coveralls -v
