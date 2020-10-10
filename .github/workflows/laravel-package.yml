@@ -49,15 +49,15 @@ jobs:
     - name: Install Dependencies
       run: |
         composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
-        composer install -q --dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        composer install --dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-    - name: Execute Integration and Feature tests via PHPUnit
+    - name: Run Tests without Nova
       if: github.event_name == 'pull_request'
       run: |
         mkdir -p ./build/logs
         vendor/bin/phpunit --configuration phpunit.xml --testsuite Integration,Feature --coverage-text --coverage-clover ./build/logs/clover.xml
 
-    - name: Execute Nova tests via PHPUnit
+    - name: Run Tests with Nova
       if: github.event_name != 'pull_request'
       run: |
         mkdir -p ./build/logs
