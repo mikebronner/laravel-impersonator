@@ -1,9 +1,9 @@
+![Laravel Package](https://github.com/GeneaLabs/laravel-impersonator/workflows/Laravel%20Package/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/GeneaLabs/laravel-impersonator/branch/master/graph/badge.svg)](https://codecov.io/gh/GeneaLabs/laravel-impersonator)
+
 # Impersonator for Laravel
 
 ![Impersonator for Laravel masthead image.](https://repository-images.githubusercontent.com/90768538/6b44c600-f29c-11e9-88af-65e839679460)
-
-[![Travis](https://img.shields.io/travis/GeneaLabs/laravel-impersonator.svg)](https://travis-ci.org/GeneaLabs/laravel-impersonator)
-[![Coveralls](https://img.shields.io/coveralls/GeneaLabs/laravel-impersonator.svg)](https://coveralls.io/github/GeneaLabs/laravel-impersonator)
 
 ## Supporting This Package
 This is an MIT-licensed open source project with its ongoing development made possible by the support of the community. If you'd like to support this, and our other packages, please consider [becoming a backer or sponsor on Patreon](https://www.patreon.com/mikebronner).
