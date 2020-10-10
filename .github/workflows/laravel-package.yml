@@ -54,17 +54,21 @@ jobs:
 
     - name: Run Tests without Nova
       if: github.event_name == 'pull_request'
-      run: |
-        mkdir -p ./coverage
-        vendor/bin/phpunit --configuration phpunit.xml --testsuite Integration,Feature --coverage-text --coverage-clover ./coverage/lcov.info
+      run: vendor/bin/phpunit --configuration phpunit.xml --testsuite Integration,Feature --coverage-text --coverage-clover ./coverage.xml
 
     - name: Run Tests with Nova
       if: github.event_name != 'pull_request'
-      run: |
-        mkdir -p ./coverage
-        vendor/bin/phpunit --configuration phpunit.xml --testsuite Nova,Integration,Feature --coverage-text --coverage-clover ./coverage/lcov.info
+      run: vendor/bin/phpunit --configuration phpunit.xml --testsuite Nova,Integration,Feature --coverage-text --coverage-clover ./coverage.xml
 
-    - name: Coveralls GitHub Action
-      uses: coverallsapp/github-action@v1.1.2
+    - name: CodeCov Report
+      uses: codecov/codecov-action@v1
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        file: ./coverage.xml # optional
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+        - name: Coveralls GitHub Action
+          uses: coverallsapp/github-action@v1.1.2
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
