@@ -63,12 +63,4 @@ jobs:
     - name: CodeCov Report
       uses: codecov/codecov-action@v1
       with:
-        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
         file: ./coverage.xml # optional
-        flags: unittests # optional
-        name: codecov-umbrella # optional
-        fail_ci_if_error: true # optional (default = false)
-        - name: Coveralls GitHub Action
-          uses: coverallsapp/github-action@v1.1.2
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
