@@ -1,6 +1,6 @@
 <?php namespace GeneaLabs\LaravelImpersonator\Tests\Fixtures;
 
-use App\User as OG;
+use App\Models\User as OG;
 use GeneaLabs\LaravelImpersonator\Traits\Impersonatable;
 
 class User extends OG
