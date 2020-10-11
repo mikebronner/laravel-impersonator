@@ -35,6 +35,8 @@ jobs:
     name: PHPMD
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code into the workspace
+        uses: actions/checkout@v2
       - name: Run php check code with reviewdog
         uses: GeneaLabs/action-reviewgod-phpmd@0.1.0
 
