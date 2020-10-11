@@ -36,9 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run php check code with reviewdog
-        uses: ducla5/laravel-app-reviewdog-action@v1
-        with:
-          tool_name: phpmd
+        uses: GeneaLabs/action-reviewgod-phpmd@0.1.0
 
   tests:
     runs-on: ubuntu-latest
