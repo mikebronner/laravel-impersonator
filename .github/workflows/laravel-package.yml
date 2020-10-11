@@ -31,6 +31,15 @@ jobs:
           standard: PSR1,PSR2,PSR12
           target_directory: src
 
+  phpmd-linter:
+    name: PHPMD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run php check code with reviewdog
+        uses: ducla5/laravel-app-reviewdog-action@v1
+        with:
+          tool: phpmd
+
   tests:
     runs-on: ubuntu-latest
     strategy:
