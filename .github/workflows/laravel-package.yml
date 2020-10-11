@@ -38,7 +38,7 @@ jobs:
       - name: Run php check code with reviewdog
         uses: ducla5/laravel-app-reviewdog-action@v1
         with:
-          tool: phpmd
+          tool_name: phpmd
 
   tests:
     runs-on: ubuntu-latest
