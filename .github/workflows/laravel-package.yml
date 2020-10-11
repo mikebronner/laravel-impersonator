@@ -7,8 +7,8 @@ on:
     branches: [ master, develop ]
 
 jobs:
-  misspell-lint:
-    name: runner / misspell
+  misspell-linter:
+    name: Spelling
     runs-on: ubuntu-latest
     steps:
       - name: Check out code.
@@ -19,16 +19,17 @@ jobs:
           github_token: ${{ secrets.github_token }}
           locale: "US"
 
-  php-check-code:
-    name: runner / php-check-code
+  phpcs-linter:
+    name: PHPCS
     runs-on: ubuntu-latest
     steps:
       - name: Check out code into the workspace
         uses: actions/checkout@v2
-      - name: Check Code
-        uses: lifulltechvn/laravel-app-reviewdog-action@v1
+      - uses: hrysd/action-php_codesniffer@v1
         with:
           github_token: ${{ secrets.github_token }}
+          standard: PSR1,PSR2,PSR12
+          target_directory: src
 
   tests:
     runs-on: ubuntu-latest
