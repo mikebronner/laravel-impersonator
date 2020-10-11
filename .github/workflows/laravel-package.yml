@@ -1,4 +1,4 @@
-name: Laravel Package
+name: Laravel Package Tests
 
 on:
   push:

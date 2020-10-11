@@ -1,29 +1,21 @@
+![Laravel Package](https://github.com/GeneaLabs/laravel-impersonator/workflows/Laravel%20Package/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/GeneaLabs/laravel-impersonator/branch/master/graph/badge.svg)](https://codecov.io/gh/GeneaLabs/laravel-impersonator)
+
 # Impersonator for Laravel
 
 ![Impersonator for Laravel masthead image.](https://repository-images.githubusercontent.com/90768538/6b44c600-f29c-11e9-88af-65e839679460)
-
-[![Travis](https://img.shields.io/travis/GeneaLabs/laravel-impersonator.svg)](https://travis-ci.org/GeneaLabs/laravel-impersonator)
-[![Coveralls](https://img.shields.io/coveralls/GeneaLabs/laravel-impersonator.svg)](https://coveralls.io/github/GeneaLabs/laravel-impersonator)
 
 ## Supporting This Package
 This is an MIT-licensed open source project with its ongoing development made possible by the support of the community. If you'd like to support this, and our other packages, please consider [becoming a backer or sponsor on Patreon](https://www.patreon.com/mikebronner).
 
 ## Pre-requisites
-- Bootstrap 3 (4 coming soon)
-- Laravel 5.5
-- PHP 7.0+
+- Laravel 8.0+
+- PHP 7.3+
 
 ## Installation
-If you are using Larvel 5.4, please switch to the
-[laravel-5.4 branch](https://github.com/GeneaLabs/laravel-impersonator/tree/laravel-5.4)
-and follow the instructions there.
-
 ```sh
 composer require genealabs/laravel-impersonator
 ```
-
-This package will be auto-loaded by Laravel 5.5, it is not necessary to register
-any service providers or aliases for this package.
 
 ## Configuration
 - `genealabs-laravel-impersonator.layout`: master blade layout view for your application (default `layouts.app`).
