@@ -47,7 +47,7 @@ jobs:
       - name: Check out code into the workspace
         uses: actions/checkout@v2
       - name: Run php check code with reviewdog
-        uses: GeneaLabs/action-reviewdog-phpstan
+        uses: GeneaLabs/action-reviewdog-phpstan@0.1.0
 
   tests:
     runs-on: ubuntu-latest
