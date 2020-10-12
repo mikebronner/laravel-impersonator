@@ -1,14 +1,17 @@
-<?php namespace GeneaLabs\LaravelImpersonator\Tests\Feature;
+<?php
 
-use GeneaLabs\LaravelImpersonator\Tests\Fixtures\User;
+namespace GeneaLabs\LaravelImpersonator\Tests\Feature;
+
 use GeneaLabs\LaravelImpersonator\Tests\FeatureTestCase;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use GeneaLabs\LaravelImpersonator\Tests\Fixtures\App\Models\User;
+use GeneaLabs\LaravelImpersonator\Tests\Fixtures\Database\Factories\UserFactory;
 
 class ImpersonationTest extends FeatureTestCase
 {
     public function testImpersonatingPageLoads()
     {
-        $user = factory(User::class)->create([
+        $user = (new UserFactory)->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
@@ -23,11 +26,11 @@ class ImpersonationTest extends FeatureTestCase
     public function testImpersonatableUsersAreListed()
     {
         config(['genealabs-laravel-impersonator.user-model' => User::class]);
-        $user = factory(User::class)->create([
+        $user = (new UserFactory)->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
-        $users = factory(User::class, 10)->create();
+        $users = (new UserFactory)->count( 10)->create();
 
         $response = $this
             ->actingAs($user)
@@ -42,11 +45,11 @@ class ImpersonationTest extends FeatureTestCase
     public function testUserCanBeImpersonated()
     {
         config(['genealabs-laravel-impersonator.user-model' => User::class]);
-        $user = factory(User::class)->create([
+        $user = (new UserFactory)->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
-        $users = factory(User::class, 10)->create();
+        $users = (new UserFactory)->count( 10)->create();
 
         $response = $this->actingAs($user)
             ->visit(route('impersonatees.index'))
@@ -61,11 +64,11 @@ class ImpersonationTest extends FeatureTestCase
         config(['genealabs-laravel-impersonator.user-model' => User::class]);
         config(['genealabs-laravel-impersonator.middleware' => ['web', 'auth', 'password.confirm' => ['except' => ['destroy']]]]);
 
-        $user = factory(User::class)->create([
+        $user = (new UserFactory)->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
-        $users = factory(User::class, 10)->create();
+        $users = (new UserFactory)->count(10) ->create();
 
         $this->expectException(RouteNotFoundException::class);
         $this->expectExceptionMessage('Route [password.confirm] not defined.');

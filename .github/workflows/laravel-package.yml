@@ -7,24 +7,58 @@ on:
     branches: [ master, develop ]
 
 jobs:
-  laravel-tests:
-
+  misspell-linter:
+    name: Spelling
     runs-on: ubuntu-latest
+    steps:
+      - name: Check out code.
+        uses: actions/checkout@v1
+      - name: misspell
+        uses: reviewdog/action-misspell@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          locale: "US"
 
+  phpcs-linter:
+    name: PHPCS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the workspace
+        uses: actions/checkout@v2
+      - uses: hrysd/action-php_codesniffer@v1.0.0
+        with:
+          github_token: ${{ secrets.github_token }}
+          standard: PSR1,PSR2,PSR12
+          target_directory: src
+
+  phpmd-linter:
+    name: PHPMD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the workspace
+        uses: actions/checkout@v2
+      - name: Run php check code with reviewdog
+        uses: GeneaLabs/action-reviewdog-phpmd@1.0.1
+
+  phpstan-linter:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the workspace
+        uses: actions/checkout@v2
+      - name: Run php check code with reviewdog
+        uses: GeneaLabs/action-reviewdog-phpstan@1.0.0
+
+  tests:
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 6
       fail-fast: false
       matrix:
         php: [7.3,7.4]
-
     name: PHP ${{ matrix.php }}
-
     steps:
     - uses: actions/checkout@v2
-
-    - uses: reviewdog/action-setup@v1
-      with:
-        reviewdog_version: latest
 
     - name: Cache dependencies
       uses: actions/cache@v1
@@ -39,11 +73,6 @@ jobs:
         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, pgsql, pdo_pgsql
         coverage: xdebug
 
-    - uses: zhulik/redis-action@1.1.0
-      with:
-        redis version: '5'
-        number of databases: 100
-
     - name: Remove Nova on a pull request
       if: github.event_name == 'pull_request'
       run: composer remove laravel/nova --no-update --no-interaction --dev
@@ -55,11 +84,6 @@ jobs:
       run: |
         composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
         composer install --dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Check Code
-        uses: lifulltechvn/laravel-app-reviewdog-action@v1
-        with:
-          github_token: ${{ secrets.github_token }}
 
     - name: Run Tests without Nova
       if: github.event_name == 'pull_request'

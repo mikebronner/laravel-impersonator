@@ -1,10 +1,14 @@
-<?php namespace GeneaLabs\LaravelImpersonator\Tests\Fixtures;
+<?php
 
-use App\Models\User as OG;
+namespace GeneaLabs\LaravelImpersonator\Tests\Fixtures\App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GeneaLabs\LaravelImpersonator\Traits\Impersonatable;
 
-class User extends OG
+class User extends Authenticatable
 {
+    use HasFactory;
     use Impersonatable;
 
     protected $canImpersonateFlag = false;
