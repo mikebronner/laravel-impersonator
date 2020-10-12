@@ -1,13 +1,16 @@
-<?php namespace GeneaLabs\LaravelImpersonator\Tests\Unit;
+<?php
 
-use GeneaLabs\LaravelImpersonator\Tests\Fixtures\User;
+namespace GeneaLabs\LaravelImpersonator\Tests\Unit;
+
 use GeneaLabs\LaravelImpersonator\Tests\UnitTestCase;
+use GeneaLabs\LaravelImpersonator\Tests\Fixtures\App\Models\User;
+use GeneaLabs\LaravelImpersonator\Tests\Fixtures\Database\Factories\UserFactory;
 
 class ImpersonateUsersTest extends UnitTestCase
 {
     public function testThatNonAdminNonLoggedInUserCannotImpersonateUsers()
     {
-        $user = factory(User::class)->create();
+        $user = (new UserFactory)->create();
 
         $response = $this->post(route('impersonatees.store', $user));
 
@@ -16,8 +19,8 @@ class ImpersonateUsersTest extends UnitTestCase
 
     public function testThatNonAdminLoggedInUserCannotImpersonateUsers()
     {
-        $user = factory(User::class)->create();
-        $impersonatedUser = factory(User::class)->create();
+        $user = (new UserFactory)->create();
+        $impersonatedUser = (new UserFactory)->create();
 
         $response = $this->actingAs($user)
             ->put(route('impersonatees.update', $impersonatedUser), []);
@@ -27,8 +30,8 @@ class ImpersonateUsersTest extends UnitTestCase
 
     public function testThatAdminLoggedInUserCanImpersonateUsers()
     {
-        $user = factory(User::class)->create(['canImpersonate' => true]);
-        $impersonatedUser = factory(User::class)->create();
+        $user = (new UserFactory)->create(['canImpersonate' => true]);
+        $impersonatedUser = (new UserFactory)->create();
 
         $this->actingAs($user)
             ->put(route('impersonatees.update', $impersonatedUser), []);

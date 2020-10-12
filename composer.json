@@ -27,19 +27,23 @@
     "require-dev": {
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
-        "laravel/browser-kit-testing": "^6.0",
-        "laravel/laravel": "^8.0",
-        "laravel/legacy-factories": "^1.0.4",
-        "laravel/ui": "^3.0",
         "nunomaduro/collision": "^5.0",
         "laravel/nova": "^3.12",
-        "orchestra/testbench": "^6.2"
+        "orchestra/testbench": "^6.2",
+        "orchestra/testbench-browser-kit": "^6.0",
+        "illuminate/database": "^8.9",
+        "laravel/ui": "^3.0"
     },
     "autoload": {
-        "classmap": [],
         "psr-4": {
-            "GeneaLabs\\LaravelImpersonator\\": "src/",
-            "GeneaLabs\\LaravelImpersonator\\Tests\\": "tests/"
+            "GeneaLabs\\LaravelImpersonator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GeneaLabs\\LaravelImpersonator\\Tests\\": "tests/",
+            "GeneaLabs\\LaravelImpersonator\\Tests\\Fixtures\\App\\": "tests/Fixtures/app/",
+            "GeneaLabs\\LaravelImpersonator\\Tests\\Fixtures\\Database\\Factories\\": "tests/Fixtures/database/factories/"
         }
     },
     "extra": {

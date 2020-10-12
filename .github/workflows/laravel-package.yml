@@ -73,11 +73,6 @@ jobs:
         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, pgsql, pdo_pgsql
         coverage: xdebug
 
-    - uses: zhulik/redis-action@1.1.0
-      with:
-        redis version: '5'
-        number of databases: 100
-
     - name: Remove Nova on a pull request
       if: github.event_name == 'pull_request'
       run: composer remove laravel/nova --no-update --no-interaction --dev
