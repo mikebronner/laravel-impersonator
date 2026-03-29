@@ -36,7 +36,7 @@ class ImpersonationTest extends TestCase
         $response->assertOk();
 
         foreach ($users as $listedUser) {
-            $response->assertSee(htmlspecialchars($listedUser->name));
+            $response->assertSee($listedUser->name);
         }
     }
 
