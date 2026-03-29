@@ -1,75 +1,42 @@
-name: Laravel Package Tests
+name: CI
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [master]
   pull_request:
-    branches: [ master, develop ]
+    branches: [master]
 
 jobs:
-  laravel-tests:
-
+  tests:
     runs-on: ubuntu-latest
 
     strategy:
-      max-parallel: 6
       fail-fast: false
       matrix:
-        php: [7.3,7.4]
+        php: ['8.2', '8.3', '8.4']
+        laravel: ['10.*', '11.*', '12.*', '13.*']
+        exclude:
+          - php: '8.2'
+            laravel: '13.*'
 
-    name: PHP ${{ matrix.php }}
+    name: PHP ${{ matrix.php }} – Laravel ${{ matrix.laravel }}
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    - uses: reviewdog/action-setup@v1
-      with:
-        reviewdog_version: latest
-
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: ~/.composer/cache/files
-        key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
-
-    - name: Setup PHP ${{ matrix.php }}
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php }}
-        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, pgsql, pdo_pgsql
-        coverage: xdebug
-
-    - uses: zhulik/redis-action@1.1.0
-      with:
-        redis version: '5'
-        number of databases: 100
-
-    - name: Remove Nova on a pull request
-      if: github.event_name == 'pull_request'
-      run: composer remove laravel/nova --no-update --no-interaction --dev
-
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-    - name: Install Dependencies
-      run: |
-        composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
-        composer install --dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Check Code
-        uses: lifulltechvn/laravel-app-reviewdog-action@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          github_token: ${{ secrets.github_token }}
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, sqlite3
+          coverage: none
 
-    - name: Run Tests without Nova
-      if: github.event_name == 'pull_request'
-      run: vendor/bin/phpunit --configuration phpunit.xml --testsuite Integration,Feature --coverage-text --coverage-clover ./coverage.xml
+      - name: Set Laravel version
+        run: |
+          composer require "illuminate/config:${{ matrix.laravel }}" "illuminate/console:${{ matrix.laravel }}" "illuminate/contracts:${{ matrix.laravel }}" "illuminate/http:${{ matrix.laravel }}" "illuminate/routing:${{ matrix.laravel }}" "illuminate/session:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "illuminate/view:${{ matrix.laravel }}" --no-interaction --no-update
 
-    - name: Run Tests with Nova
-      if: github.event_name != 'pull_request'
-      run: vendor/bin/phpunit --configuration phpunit.xml --testsuite Nova,Integration,Feature --coverage-text --coverage-clover ./coverage.xml
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
 
-    - name: CodeCov Report
-      uses: codecov/codecov-action@v1
-      with:
-        file: ./coverage.xml # optional
+      - name: Run tests
+        run: vendor/bin/phpunit

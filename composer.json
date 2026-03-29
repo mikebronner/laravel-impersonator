@@ -8,47 +8,41 @@
             "email": "hello@genealabs.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        }
-    ],
     "require": {
-        "illuminate/config": "^10.0",
-        "illuminate/console": "^10.0",
-        "illuminate/contracts": "^10.0",
-        "illuminate/http": "^10.0",
-        "illuminate/routing": "^10.0",
-        "illuminate/session": "^10.0",
-        "illuminate/support": "^10.0",
-        "illuminate/view": "^10.0"
+        "php": "^8.2",
+        "illuminate/config": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/console": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/http": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/routing": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/session": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/view": "^10.0|^11.0|^12.0|^13.0"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0",       
-        "laravel/browser-kit-testing": "^7.0",
-        "php-coveralls/php-coveralls" : "^2.2",
-        "phpmd/phpmd": "^2.8",
-        "laravel/nova": "^3.12"
+        "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^10.0|^11.0|^12.0"
     },
     "autoload": {
-        "classmap": [],
         "psr-4": {
-            "GeneaLabs\\LaravelImpersonator\\": "src/",
+            "GeneaLabs\\LaravelImpersonator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "GeneaLabs\\LaravelImpersonator\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "GeneaLabs\\LaravelImpersonator\\Providers\\Service",
-                "GeneaLabs\\LaravelImpersonator\\Providers\\Tool"
+                "GeneaLabs\\LaravelImpersonator\\Providers\\Service"
             ]
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
 }

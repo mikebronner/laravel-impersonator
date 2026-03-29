@@ -1,16 +1,18 @@
-<?php namespace GeneaLabs\LaravelImpersonator\Tests\Unit\Console\Commands;
+<?php
 
-use GeneaLabs\LaravelImpersonator\Tests\UnitTestCase;
+namespace GeneaLabs\LaravelImpersonator\Tests\Unit\Console\Commands;
 
-class PublishTest extends UnitTestCase
+use GeneaLabs\LaravelImpersonator\Tests\TestCase;
+
+class PublishTest extends TestCase
 {
-    private function delTree($folder)
+    private function delTree(string $folder): bool
     {
         if (! is_dir($folder)) {
             return false;
         }
 
-        $files = array_diff(scandir($folder), ['.','..']);
+        $files = array_diff(scandir($folder), ['.', '..']);
 
         foreach ($files as $file) {
             is_dir("$folder/$file") ? $this->delTree("$folder/$file") : unlink("$folder/$file");
@@ -19,7 +21,7 @@ class PublishTest extends UnitTestCase
         return rmdir($folder);
     }
 
-    public function testConfigFileIsPublished()
+    public function test_config_file_is_published(): void
     {
         if (file_exists(config_path('genealabs-laravel-impersonator.php'))) {
             unlink(config_path('genealabs-laravel-impersonator.php'));
@@ -30,7 +32,7 @@ class PublishTest extends UnitTestCase
         $this->assertFileExists(config_path('genealabs-laravel-impersonator.php'));
     }
 
-    public function testViewsArePublished()
+    public function test_views_are_published(): void
     {
         $this->delTree(resource_path('views/vendor/genealabs/laravel-impersonator'));
 
@@ -39,7 +41,7 @@ class PublishTest extends UnitTestCase
         $this->assertDirectoryExists(resource_path('views/vendor/genealabs-laravel-impersonator'));
     }
 
-    public function testViewsAreDeletedBeforePublishing()
+    public function test_views_are_deleted_before_publishing(): void
     {
         $this->artisan('impersonator:publish', ['--views' => true]);
         app('files')->makeDirectory(resource_path('views/vendor/genealabs-laravel-impersonator/test'), 0755, true, true);
