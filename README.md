@@ -14,12 +14,12 @@ This is an MIT-licensed open source project with its ongoing development made po
 
 ## Version Support Matrix
 
-| Laravel | PHP         |
-|---------|-------------|
-| 10.x    | 8.2, 8.3, 8.4 |
-| 11.x    | 8.2, 8.3, 8.4 |
-| 12.x    | 8.2, 8.3, 8.4 |
-| 13.x    | 8.3, 8.4   |
+| Laravel | PHP              |
+|---------|------------------|
+| 10.x    | 8.2, 8.3, 8.4, 8.5 |
+| 11.x    | 8.2, 8.3, 8.4, 8.5 |
+| 12.x    | 8.2, 8.3, 8.4, 8.5 |
+| 13.x    | 8.3, 8.4, 8.5   |
 
 ## Installation
 ```sh
