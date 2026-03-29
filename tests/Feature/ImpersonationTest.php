@@ -1,77 +1,80 @@
-<?php namespace GeneaLabs\LaravelImpersonator\Tests\Feature;
+<?php
+
+namespace GeneaLabs\LaravelImpersonator\Tests\Feature;
 
 use GeneaLabs\LaravelImpersonator\Tests\Fixtures\User;
-use GeneaLabs\LaravelImpersonator\Tests\FeatureTestCase;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use GeneaLabs\LaravelImpersonator\Tests\TestCase;
 
-class ImpersonationTest extends FeatureTestCase
+class ImpersonationTest extends TestCase
 {
-    public function testImpersonatingPageLoads()
+    public function test_impersonating_page_loads(): void
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
 
-        $response = $this
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->get(route('impersonatees.index'));
 
-        $response->assertResponseOk();
+        $response->assertOk();
     }
 
-    public function testImpersonatableUsersAreListed()
+    public function test_impersonatable_users_are_listed(): void
     {
         config(['genealabs-laravel-impersonator.user-model' => User::class]);
-        $user = factory(User::class)->create([
+
+        $user = User::factory()->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
-        $users = factory(User::class, 10)->create();
+        $users = User::factory()->count(10)->create();
 
-        $response = $this
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->get(route('impersonatees.index'));
 
-        $response->assertResponseOk();
-        foreach ($users as $user) {
-            $response->see(htmlspecialchars($user->name));
+        $response->assertOk();
+
+        foreach ($users as $listedUser) {
+            $response->assertSee(htmlspecialchars($listedUser->name));
         }
     }
 
-    public function testUserCanBeImpersonated()
+    public function test_user_can_be_impersonated(): void
     {
         config(['genealabs-laravel-impersonator.user-model' => User::class]);
-        $user = factory(User::class)->create([
+
+        $user = User::factory()->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
-        $users = factory(User::class, 10)->create();
+        $impersonatee = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->visit(route('impersonatees.index'))
-            ->press($users->first()->name);
+            ->put(route('impersonatees.update', $impersonatee));
 
-        $response->assertSessionHas('impersonator', $user);
+        $response->assertRedirect('/');
+        $this->assertAuthenticatedAs($impersonatee);
     }
 
-    public function testMiddlewareCanBeAdjusted()
+    public function test_impersonation_can_be_ended(): void
     {
-        $this->withoutExceptionHandling();
         config(['genealabs-laravel-impersonator.user-model' => User::class]);
-        config(['genealabs-laravel-impersonator.middleware' => ['web', 'auth', 'password.confirm' => ['except' => ['destroy']]]]);
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'canImpersonate' => true,
             'canBeImpersonated' => false,
         ]);
-        $users = factory(User::class, 10)->create();
+        $impersonatee = User::factory()->create();
 
-        $this->expectException(RouteNotFoundException::class);
-        $this->expectExceptionMessage('Route [password.confirm] not defined.');
+        // Start impersonation
+        $this->actingAs($user)
+            ->put(route('impersonatees.update', $impersonatee));
 
-        $response = $this
-            ->actingAs($user)
-            ->get(route('impersonatees.index'));
+        // End impersonation
+        $response = $this->delete(route('impersonatees.destroy', $impersonatee));
+
+        $response->assertRedirect('/');
+        $this->assertAuthenticatedAs($user);
     }
 }

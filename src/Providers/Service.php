@@ -7,7 +7,6 @@ use GeneaLabs\LaravelImpersonator\Impersonator;
 
 class Service extends AuthServiceProvider
 {
-    protected $defer = false;
     protected $policies = [
         Impersonator::class => Impersonation::class,
     ];

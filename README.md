@@ -9,8 +9,17 @@
 This is an MIT-licensed open source project with its ongoing development made possible by the support of the community. If you'd like to support this, and our other packages, please consider [becoming a backer or sponsor on Patreon](https://www.patreon.com/mikebronner).
 
 ## Pre-requisites
-- Laravel 8.0+
-- PHP 7.3+
+- Laravel 10.0+
+- PHP 8.2+
+
+## Version Support Matrix
+
+| Laravel | PHP         |
+|---------|-------------|
+| 10.x    | 8.2, 8.3, 8.4 |
+| 11.x    | 8.2, 8.3, 8.4 |
+| 12.x    | 8.2, 8.3, 8.4 |
+| 13.x    | 8.3, 8.4   |
 
 ## Installation
 ```sh
